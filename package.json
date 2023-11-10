@@ -1,0 +1,45 @@
+{
+  "name": "jetty-chart",
+  "version": "0.1.6",
+  "private": false,
+  "main": "dist/index.js",
+  "browser": "./browser/specific/main.js",
+  "files": [ "dist", "README.md" ],
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "clean": "rimraf dist",
+    "compile": "npm run clean && cross-env NODE_ENV=production babel src/components --out-dir dist --copy-files",
+    "build-lib": "babel src --out-dir dist --copy-files"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0",
+    "react-scripts": "^4.0.0 || ^5.0.0"
+  },
+  "keywords" : ["react", "chart", "jetty", "react-chart"],
+  "repository" : {
+  "type": "git",
+    "url" : "git://github.com/sdh20282/jetty-chart.git"
+  }
+}
