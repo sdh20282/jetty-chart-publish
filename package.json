@@ -1,10 +1,13 @@
 {
   "name": "jetty-chart",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "private": false,
   "main": "dist/index.js",
   "browser": "./browser/specific/main.js",
-  "files": [ "dist", "README.md" ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -37,9 +40,18 @@
     "react-dom": "^17.0.0 || ^18.0.0",
     "react-scripts": "^4.0.0 || ^5.0.0"
   },
-  "keywords" : ["react", "chart", "jetty", "react-chart"],
-  "repository" : {
-  "type": "git",
-    "url" : "git://github.com/sdh20282/jetty-chart.git"
+  "keywords": [
+    "react",
+    "chart",
+    "jetty",
+    "react-chart"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sdh20282/jetty-chart.git"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/preset-react": "^7.23.3"
   }
 }
