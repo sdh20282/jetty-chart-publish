@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const MultiLine = _ref => {
   var _dataSet$;
   let {
-    dataSet,
+    data,
     xLegend,
     yLegend,
     normalSettings,
@@ -32,6 +32,7 @@ const MultiLine = _ref => {
     lineSettings,
     animationSettings
   } = _ref;
+  const dataSet = data;
   if (!dataSet || dataSet.length === 0) {
     return;
   }
@@ -69,8 +70,10 @@ const MultiLine = _ref => {
     lineWidth,
     enablePoint,
     pointColor,
+    pointColorFollowLineColor,
     pointSize,
     pointBorderColor,
+    pointBorderColorFollowLineColor,
     pointBorderWidth,
     enablePointLabel,
     showLabelOnHover,
@@ -87,7 +90,6 @@ const MultiLine = _ref => {
     strokeLinejoin,
     strokeLinecap
   } = result.lineSettings;
-  const colorPalette = [...result.normalSettings.colorPalette];
   let combinedData = [];
   const idArray = [];
   dataSet.forEach(element => {
@@ -298,7 +300,7 @@ const MultiLine = _ref => {
   prevPointTemp.current = {
     ...pointPosition
   };
-  const lineColors = [...Array(dataSet.length).keys()].map(idx => colorPalette[idx % colorPalette.length]);
+  const lineColors = [...Array(dataSet.length).keys()].map(idx => [...result.normalSettings.colorPalette][idx % result.normalSettings.colorPalette.length]);
   const ms = new Date().valueOf();
   const diffLength = dataLength - prevPath.current.dataLength;
   if (diffLength > 0) {
@@ -358,6 +360,7 @@ const MultiLine = _ref => {
     animationSettings: result.animationSettings,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("g", {
       transform: horizontal ? "translate(0,".concat(padding, ")") : "translate(".concat(padding, ")"),
+      className: _lineModule.default.container,
       children: [enableArea && areaPathArray.map((d, idx) => {
         var _prevPath$current, _prevPath$current2, _prevPath$current3;
         const useMove = useTranslateArea && prevPath.current.dataSetLength > idx;
@@ -452,8 +455,8 @@ const MultiLine = _ref => {
           cx: 0,
           cy: 0,
           r: pointSize,
-          fill: pointColor ? pointColor : lineColors[index],
-          stroke: pointBorderColor ? pointBorderColor : lineColors[index],
+          fill: pointColorFollowLineColor ? lineColors[index] : pointColor,
+          stroke: pointBorderColorFollowLineColor ? lineColors[index] : pointBorderColor,
           strokeWidth: pointBorderWidth
         })
       }, "point-".concat(ms, "-").concat(index, "-").concat(idx));

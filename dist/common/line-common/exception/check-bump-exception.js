@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.checkNormalBump = void 0;
+var _colorPalette = require("../../utils/color/colorPalette");
 var _checkCommonException = require("../../utils/exception/check-common-exception");
 const checkMargin = _ref => {
   var _margin$top, _margin$bottom, _margin$left, _margin$right;
@@ -41,8 +42,7 @@ const normalBumpSetting = {
       top: 0,
       bottom: 0
     },
-    // colorPalette: ["#202202", "#4E3708", "#772F13", "#9C212B", "#BC3473", "#C75CB7", "#BD88CD", "#C0B1D8", "#D6D6E6", "#F6F7F9"],
-    colorPalette: ["#8ecae6", "#219ebc", "#2364aa", "#ffb703", "#fb8500", "#fb5607", "#ff006e", "#8338ec", "#6a994e", "#00f5d4", "#003e1f", "#92140c"],
+    colorPalette: _colorPalette.colorPalette.diffrent,
     padding: 0,
     reverse: false,
     horizontal: false
@@ -219,9 +219,11 @@ const normalBumpSetting = {
     lineOpacity: 1,
     lineWidth: 2,
     enablePoint: true,
-    pointColor: null,
+    pointColor: "#000",
+    pointColorFollowLineColor: true,
     pointSize: 4,
-    pointBorderColor: null,
+    pointBorderColor: "#fff",
+    pointBorderColorFollowLineColor: true,
     pointBorderWidth: 2,
     // enablePointLabel: true,
     // showLabelOnHover: true,

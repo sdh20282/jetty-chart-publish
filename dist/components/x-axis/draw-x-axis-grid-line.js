@@ -89,6 +89,7 @@ const DrawXAxisGridLine = _ref => {
     prevXAxisTemp.current = [];
   }
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("g", {
+    className: _xAxisGridLineModule.default.container,
     children: [showEndLine && /*#__PURE__*/(0, _jsxRuntime.jsx)("g", {
       transform: horizontal ? "translate(0,0)" : "translate(0,0)",
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {

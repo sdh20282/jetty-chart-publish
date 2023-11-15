@@ -58,6 +58,7 @@ const DrawYAxisGridLine = _ref => {
     prevYAxisTemp.current = [];
   }
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("g", {
+    className: _yAxisGridLineModule.default.container,
     children: yAxis.map((c, idx) => {
       if (!showTopScope && (idx === 0 || idx === yAxis.length - 1) && c !== 0) {
         return;

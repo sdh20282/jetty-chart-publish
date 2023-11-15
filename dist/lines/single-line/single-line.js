@@ -36,7 +36,7 @@ const SingleLine = _ref => {
     data: data
   }];
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_multiLine.MultiLine, {
-    dataSet: dataSet,
+    data: dataSet,
     xLegend: xLegend,
     yLegend: yLegend,
     normalSettings: normalSettings,

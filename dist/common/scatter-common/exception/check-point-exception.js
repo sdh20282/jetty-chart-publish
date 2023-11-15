@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.checkNormalPoint = void 0;
+var _colorPalette = require("../../utils/color/colorPalette");
 var _checkCommonException = require("../../utils/exception/check-common-exception");
 const normalPointSetting = {
   // 기본 세팅
@@ -21,7 +22,7 @@ const normalPointSetting = {
       top: 0,
       bottom: 0
     },
-    colorPalette: ["#93c5fd", "#fdba74", "#fca5a5", "#cbd5e1", "#86efac"],
+    colorPalette: _colorPalette.colorPalette["jetty juice"],
     padding: 0,
     xReverse: false,
     yReverse: false,

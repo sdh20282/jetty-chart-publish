@@ -69,6 +69,7 @@ const DrawXAxisLabel = _ref => {
   }
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("g", {
     transform: horizontal ? "translate(".concat(labelOnBottom ? -totalLabelMargin : labelLocation, ",").concat(padding, ")") : "translate(".concat(padding, ",").concat(labelOnBottom ? labelLocation : -totalLabelMargin, ")"),
+    className: _xAxisLabelModule.default.container,
     children: xAxis.map((d, idx) => {
       const x = xAxisWidth * idx + xAxisInitialPosition;
       const nowKey = "x-axis-label-".concat(idx);

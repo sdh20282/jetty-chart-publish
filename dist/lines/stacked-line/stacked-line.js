@@ -4,12 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.StackedLine = void 0;
-var _checkLineException = require("../../common/utils/exception/check-line-exception");
+var _checkLineException = require("../../common/line-common/exception/check-line-exception");
 var _multiLine = require("../multi-line/multi-line");
 var _jsxRuntime = require("react/jsx-runtime");
 const StackedLine = _ref => {
   let {
-    dataSet,
+    data,
     keys,
     xLegend,
     yLegend,
@@ -27,6 +27,7 @@ const StackedLine = _ref => {
     lineSettings,
     animationSettings
   } = _ref;
+  let dataSet = data;
   if (!dataSet || dataSet.length === 0) {
     return;
   }

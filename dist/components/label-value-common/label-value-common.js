@@ -13,7 +13,7 @@ var _drawXAxisLegend = require("../x-axis/draw-x-axis-legend");
 var _drawLegends = require("../legend/draw-legends");
 var _jsxRuntime = require("react/jsx-runtime");
 const LabelValueCommon = _ref => {
-  var _innerMargin;
+  var _innerMargin, _outWidth, _outHeight;
   let {
     keys,
     xAxis,
@@ -23,6 +23,8 @@ const LabelValueCommon = _ref => {
     normalSettings: {
       width,
       height,
+      outWidth,
+      outHeight,
       backgroundColor,
       margin,
       innerMargin,
@@ -58,15 +60,15 @@ const LabelValueCommon = _ref => {
     top: 0,
     bottom: 0
   };
+  (_outWidth = outWidth) !== null && _outWidth !== void 0 ? _outWidth : outWidth = width;
+  (_outHeight = outHeight) !== null && _outHeight !== void 0 ? _outHeight : outHeight = height;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     style: {
-      width: "".concat(width, "px"),
-      height: "".concat(height, "px"),
-      border: "1px solid #ccc"
+      width: "".concat(outWidth, "px"),
+      height: "".concat(outHeight, "px")
     },
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("svg", {
-      width: width,
-      height: height,
+      viewBox: "0 0 ".concat(width, " ").concat(height),
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("rect", {
         width: "100%",
         height: "100%",

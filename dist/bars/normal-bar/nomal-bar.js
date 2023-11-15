@@ -195,6 +195,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
         innerMargin,
         padding
       }),
+      className: _normalBarModule.default.container,
       children: data.map((d, idx) => {
         const nowData = {
           ...d

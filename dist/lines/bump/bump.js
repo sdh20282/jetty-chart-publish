@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const BumpChart = _ref => {
   var _dataSet$;
   let {
-    dataSet,
+    data,
     xLegend,
     yLegend,
     normalSettings,
@@ -30,6 +30,7 @@ const BumpChart = _ref => {
     lineSettings,
     animationSettings
   } = _ref;
+  const dataSet = data;
   if (!dataSet || dataSet.length === 0) {
     return;
   }
@@ -54,7 +55,7 @@ const BumpChart = _ref => {
     lineSettings,
     animationSettings
   });
-  result.normalSettings.padding += lineSettings.xOuterPadding;
+  result.normalSettings.padding += result.lineSettings.xOuterPadding;
   const {
     width,
     height,
@@ -72,6 +73,8 @@ const BumpChart = _ref => {
     enablePoint,
     pointSize,
     pointColor,
+    pointColorFollowLineColor,
+    pointBorderColorFollowLineColor,
     pointBorderColor,
     pointBorderWidth,
     // enablePointLabel,
@@ -161,10 +164,8 @@ const BumpChart = _ref => {
     } else {
       pathString = coords.reduce((acc, curr, idx) => {
         const isFirstPoint = idx === 0;
-        let tempPath = "";
-        if (!isFirstPoint) tempPath += " L";
-        tempPath += " ".concat(curr[0], " ").concat(curr[1]);
-        return acc + tempPath;
+        if (isFirstPoint) return " ".concat(curr[0] - xOuterPadding, " ").concat(curr[1], " L ").concat(curr[0], " ").concat(curr[1]);
+        return acc + " L ".concat(curr[0], " ").concat(curr[1]);
       }, "");
     }
     if (enableArea) {
@@ -246,6 +247,7 @@ const BumpChart = _ref => {
     animationSettings: result.animationSettings,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("g", {
       transform: horizontal ? "translate(0,".concat(padding, ")") : "translate(".concat(padding, ")"),
+      className: _bumpModule.default.container,
       children: [enableArea && areaPathArray.map((d, idx) => {
         return /*#__PURE__*/(0, _jsxRuntime.jsxs)("g", {
           children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("defs", {
@@ -316,8 +318,8 @@ const BumpChart = _ref => {
               cx: 0,
               cy: 0,
               r: pointSize,
-              fill: pointColor !== null && pointColor !== void 0 ? pointColor : lineColors[idx],
-              stroke: pointBorderColor !== null && pointBorderColor !== void 0 ? pointBorderColor : lineColors[idx],
+              fill: pointColorFollowLineColor ? lineColors[idx] : pointColor,
+              stroke: pointBorderColorFollowLineColor ? lineColors[idx] : pointBorderColor,
               strokeWidth: pointBorderWidth
             })
           }, "point-multi-" + idx);

@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.checkNormalLine = void 0;
+var _colorPalette = require("../../utils/color/colorPalette");
 var _checkCommonException = require("../../utils/exception/check-common-exception");
 const checkMargin = _ref => {
   var _margin$top, _margin$bottom, _margin$left, _margin$right;
@@ -41,7 +42,7 @@ const normalLineSetting = {
       top: 0,
       bottom: 0
     },
-    colorPalette: ["#5DADE2", "#F1948A", "#82E0AA", "#D7BDE2"],
+    colorPalette: _colorPalette.colorPalette.jetty,
     padding: 0,
     reverse: false,
     horizontal: false
@@ -217,9 +218,11 @@ const normalLineSetting = {
     lineOpacity: 1,
     lineWidth: 2,
     enablePoint: true,
-    pointColor: null,
+    pointColor: "#000",
+    pointColorFollowLineColor: true,
     pointSize: 2,
     pointBorderColor: "#666",
+    pointBorderColorFollowLineColor: true,
     pointBorderWidth: 2,
     enablePointLabel: false,
     showLabelOnHover: false,
@@ -229,7 +232,7 @@ const normalLineSetting = {
     pointLabelOffsetY: -10,
     pointLabelWeight: 500,
     enableArea: false,
-    areaColor: null,
+    areaColorFollowLineColor: true,
     areaOpacity: 0.5,
     enableCurve: false,
     smoothDegree: 0.15,

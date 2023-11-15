@@ -33,6 +33,12 @@ Object.defineProperty(exports, "NormalScatter", {
     return _scatter.NormalScatter;
   }
 });
+Object.defineProperty(exports, "Pie", {
+  enumerable: true,
+  get: function () {
+    return _pies.Pie;
+  }
+});
 Object.defineProperty(exports, "SingleLine", {
   enumerable: true,
   get: function () {
@@ -55,3 +61,4 @@ var _bars = require("./bars/bars");
 var _maps = require("./maps/maps");
 var _scatter = require("./scatter/scatter");
 var _lines = require("./lines/lines");
+var _pies = require("./pies/pies");

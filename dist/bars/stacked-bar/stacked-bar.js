@@ -202,6 +202,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
         innerMargin,
         padding
       }),
+      className: _stackedBarModule.default.container,
       children: data.map((d, index) => {
         const nowData = {
           ...d

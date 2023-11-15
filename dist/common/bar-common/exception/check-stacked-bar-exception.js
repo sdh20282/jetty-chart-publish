@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.checkStackedBar = void 0;
+var _colorPalette = require("../../utils/color/colorPalette");
 var _checkCommonException = require("../../utils/exception/check-common-exception");
 const checkMargin = _ref => {
   var _margin$top, _margin$bottom, _margin$left, _margin$right;
@@ -40,7 +41,7 @@ const stackedBarSetting = {
       top: 0,
       bottom: 0
     },
-    colorPalette: ["#669dfe", "#876697", "#520592", "#24c391", "#d2c919", "#d12305"],
+    colorPalette: _colorPalette.colorPalette["deep sea"],
     useVariousColors: false,
     padding: 20,
     reverse: false,
