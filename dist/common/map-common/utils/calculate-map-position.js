@@ -24,17 +24,12 @@ const checkMapMargin = _ref => {
   };
 };
 exports.checkMapMargin = checkMapMargin;
-const checkDivide = _ref2 => {
-  let {
-    divide
-  } = _ref2;
+const checkDivide = divide => {
   if (divide < 2) {
     divide = 2;
   }
   if (divide > 5) {
     divide = 5;
-  } else {
-    divide;
   }
   return divide;
 };

@@ -4,13 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.StackedLine = void 0;
-var _checkLineException = require("../../common/line-common/exception/check-line-exception");
-var _multiLine = require("../multi-line/multi-line");
+var _DrawLine = require("../common/DrawLine");
 var _jsxRuntime = require("react/jsx-runtime");
 const StackedLine = _ref => {
   let {
     data,
-    keys,
     xLegend,
     yLegend,
     normalSettings,
@@ -27,12 +25,11 @@ const StackedLine = _ref => {
     lineSettings,
     animationSettings
   } = _ref;
-  let dataSet = data;
-  if (!dataSet || dataSet.length === 0) {
+  if (!data || data.length === 0) {
     return;
   }
   const stackedData = [];
-  dataSet.forEach((element, idx) => {
+  data.forEach((element, idx) => {
     if (idx === 0) {
       stackedData.push({
         ...element
@@ -50,40 +47,24 @@ const StackedLine = _ref => {
       data: newData
     });
   });
-  dataSet = [...stackedData].reverse();
-  const result = (0, _checkLineException.checkNormalLine)({
-    normalSettings,
-    scopeSettings,
-    axisXGridLineSettings,
-    axisYGridLineSettings,
-    leftLabelSettings,
-    rightLabelSettings,
-    bottomLabelSettings,
-    topLabelSettings,
-    leftLegendSettings,
-    rightLegendSettings,
-    legendSettings,
-    lineSettings,
-    animationSettings
-  });
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_multiLine.MultiLine, {
-    dataSet: dataSet,
-    keys: keys,
+  data = [...stackedData].reverse();
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DrawLine.DrawLine, {
+    data: data,
     xLegend: xLegend,
     yLegend: yLegend,
-    normalSettings: result.normalSettings,
-    scopeSettings: result.scopeSettings,
-    axisXGridLineSettings: result.axisXGridLineSettings,
-    axisYGridLineSettings: result.axisYGridLineSettings,
-    leftLabelSettings: result.leftLabelSettings,
-    rightLabelSettings: result.rightLabelSettings,
-    bottomLabelSettings: result.bottomLabelSettings,
-    topLabelSettings: result.topLabelSettings,
-    leftLegendSettings: result.leftLegendSettings,
-    rightLegendSettings: result.rightLegendSettings,
-    legendSettings: result.legendSettings,
-    lineSettings: result.lineSettings,
-    animationSettings: result.animationSettings
+    normalSettings: normalSettings,
+    scopeSettings: scopeSettings,
+    axisXGridLineSettings: axisXGridLineSettings,
+    axisYGridLineSettings: axisYGridLineSettings,
+    leftLabelSettings: leftLabelSettings,
+    rightLabelSettings: rightLabelSettings,
+    bottomLabelSettings: bottomLabelSettings,
+    topLabelSettings: topLabelSettings,
+    leftLegendSettings: leftLegendSettings,
+    rightLegendSettings: rightLegendSettings,
+    legendSettings: legendSettings,
+    lineSettings: lineSettings,
+    animationSettings: animationSettings
   });
 };
 exports.StackedLine = StackedLine;

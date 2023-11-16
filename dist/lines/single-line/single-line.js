@@ -4,10 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SingleLine = void 0;
-var _multiLine = require("../multi-line/multi-line");
+var _DrawLine = require("../common/DrawLine");
 var _jsxRuntime = require("react/jsx-runtime");
-/* eslint-disable complexity */
-
 const SingleLine = _ref => {
   let {
     data,
@@ -31,12 +29,11 @@ const SingleLine = _ref => {
   if (!data || data.length === 0) {
     return;
   }
-  const dataSet = [{
-    id: title,
-    data: data
-  }];
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_multiLine.MultiLine, {
-    data: dataSet,
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_DrawLine.DrawLine, {
+    data: [{
+      id: title,
+      data: data
+    }],
     xLegend: xLegend,
     yLegend: yLegend,
     normalSettings: normalSettings,

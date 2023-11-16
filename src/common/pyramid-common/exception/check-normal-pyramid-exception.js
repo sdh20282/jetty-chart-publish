@@ -1,60 +1,33 @@
-"use strict";
+import { checkMargin, checkSize } from "../../utils/exception/check-common-exception";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.checkNormalBar = void 0;
-var _colorPalette = require("../../utils/color/colorPalette");
-var _checkCommonException = require("../../utils/exception/check-common-exception");
-const checkMargin = _ref => {
-  var _margin$top, _margin$bottom, _margin$left, _margin$right;
-  let {
-    margin
-  } = _ref;
-  (_margin$top = margin.top) !== null && _margin$top !== void 0 ? _margin$top : margin.top = 60;
-  (_margin$bottom = margin.bottom) !== null && _margin$bottom !== void 0 ? _margin$bottom : margin.bottom = 70;
-  (_margin$left = margin.left) !== null && _margin$left !== void 0 ? _margin$left : margin.left = 80;
-  (_margin$right = margin.right) !== null && _margin$right !== void 0 ? _margin$right : margin.right = 120;
-  return margin;
-};
-const checkInnerMargin = _ref2 => {
-  let {
-    innerMargin
-  } = _ref2;
+const checkInnerMargin = ({ innerMargin }) => {
   innerMargin.top = 0;
   innerMargin.bottom = 0;
+
   return innerMargin;
 };
+
 const normalBarSetting = {
   // 기본 세팅
   normalSettings: {
     width: 500,
     height: 400,
     backgroundColor: "#fff",
-    margin: {
-      top: 60,
-      bottom: 70,
-      left: 80,
-      right: 120
-    },
-    innerMargin: {
-      top: 0,
-      bottom: 0
-    },
-    colorPalette: _colorPalette.colorPalette.jetty,
-    useVariousColors: false,
+    margin: { top: 60, bottom: 70, left: 80, right: 80 },
+    innerMargin: { top: 0, bottom: 0 },
+    colorPalette: ["#669dfe", "#876697"],
     padding: 20,
-    reverse: false,
-    horizontal: false
+    xReverse: false,
+    yReverse: false,
   },
   // 범위 세팅
   scopeSettings: {
     autoScope: true,
-    maxScope: 700,
-    minScope: -100,
-    showTopScope: true
+    maxScope: 2000,
+    minScope: 0,
+    showTopScope: true,
   },
-  // y축 라인 세팅
+  // x축 라인 세팅
   axisYGridLineSettings: {
     lineVisible: true,
     lineOpacity: 1,
@@ -63,11 +36,11 @@ const normalBarSetting = {
     lineDash: false,
     lineDashWidth: 5,
     lineDashGap: 3,
-    lineRound: false
+    lineRound: false,
   },
-  // x축 라인 세팅
+  // y축 라인 세팅
   axisXGridLineSettings: {
-    lineVisible: false,
+    lineVisible: true,
     lineOpacity: 1,
     lineColor: "#d4d4d4",
     lineWidth: 1,
@@ -75,9 +48,9 @@ const normalBarSetting = {
     lineDashWidth: 5,
     lineDashGap: 3,
     lineRound: false,
-    showEndLine: false
+    showEndLine: false,
   },
-  // 왼쪽 라벨 세팅
+  // 위쪽 라벨 세팅
   leftLabelSettings: {
     useLabel: true,
     labelOnLeft: true,
@@ -92,9 +65,9 @@ const normalBarSetting = {
     sideLineVisible: true,
     sideLineOpacity: 1,
     sideLineColor: "#aaa",
-    sideLineWidth: 2
+    sideLineWidth: 2,
   },
-  // 오른쪽 라벨 세팅
+  // 아래쪽 라벨 세팅
   rightLabelSettings: {
     useLabel: false,
     labelOnLeft: false,
@@ -109,9 +82,9 @@ const normalBarSetting = {
     sideLineVisible: true,
     sideLineOpacity: 1,
     sideLineColor: "#aaa",
-    sideLineWidth: 2
+    sideLineWidth: 2,
   },
-  // 아래쪽 라벨 세팅
+  // 왼쪽 라벨 세팅
   bottomLabelSettings: {
     useLabel: true,
     labelOnBottom: true,
@@ -126,9 +99,9 @@ const normalBarSetting = {
     sideLineVisible: true,
     sideLineOpacity: 1,
     sideLineColor: "#aaa",
-    sideLineWidth: 2
+    sideLineWidth: 2,
   },
-  // 위쪽 라벨 세팅
+  // 오른쪽 라벨 세팅
   topLabelSettings: {
     useLabel: false,
     labelOnBottom: false,
@@ -143,9 +116,9 @@ const normalBarSetting = {
     sideLineVisible: true,
     sideLineOpacity: 1,
     sideLineColor: "#aaa",
-    sideLineWidth: 2
+    sideLineWidth: 2,
   },
-  // 왼쪽 설명 세팅
+  // 위쪽 설명 세팅
   leftLegendSettings: {
     useLegend: true,
     legendOnLeft: true,
@@ -155,9 +128,9 @@ const normalBarSetting = {
     legendOpacity: 1,
     legendColor: "#333",
     legendReverse: false,
-    legendMove: 0
+    legendMove: 0,
   },
-  // 오른쪽 설명 세팅
+  // 아래쪽 설명 세팅
   rightLegendSettings: {
     useLegend: false,
     legendOnLeft: false,
@@ -167,21 +140,21 @@ const normalBarSetting = {
     legendOpacity: 1,
     legendColor: "#333",
     legendReverse: false,
-    legendMove: 0
+    legendMove: 0,
   },
-  // 아래쪽 설명 세팅
+  // 왼쪽 설명 세팅
   bottomLegendSettings: {
     useLegend: true,
     legendOnBottom: true,
-    legendMargin: 40,
+    legendMargin: 60,
     legendSize: 14,
     legendWeight: 700,
     legendOpacity: 1,
     legendColor: "#333",
     legendReverse: false,
-    legendMove: 0
+    legendMove: 0,
   },
-  // 위쪽 설명 세팅
+  // 오른쪽 설명 세팅
   topLegendSettings: {
     useLegend: false,
     legendOnBottom: false,
@@ -191,13 +164,12 @@ const normalBarSetting = {
     legendOpacity: 1,
     legendColor: "#333",
     legendReverse: false,
-    legendMove: 0
+    legendMove: 0,
   },
   // 설명 세팅
   legendSettings: {
     useLegend: true,
-    position: "bottom-right",
-    // bottom center top - left center right
+    position: "bottom-right", // bottom center top - left center right
     xLocation: 16,
     yLocation: 0,
     directionColumn: true,
@@ -211,7 +183,7 @@ const normalBarSetting = {
     legendWeight: 400,
     legendOpacity: 1,
     legendColor: "#aaa",
-    legendOnStart: true
+    legendOnStart: true,
   },
   // 바 세팅
   barSettings: {
@@ -226,14 +198,13 @@ const normalBarSetting = {
     useMinHeight: true,
     minHeight: 1,
     useLabel: true,
-    labelPosition: "over",
-    // over, center, under,
+    labelPosition: "center", // over, center, under,
     labelMargin: 5,
     labelSize: 11,
     labelWeight: 500,
     labelOpacity: 1,
-    labelColor: "#777",
-    labelInvisibleHeight: 0
+    labelColor: "black",
+    labelInvisibleHeight: 0,
   },
   animationSettings: {
     axisYGridLineSettings: {
@@ -244,106 +215,77 @@ const normalBarSetting = {
       renderItemDelay: 0.1,
       renderTimingFunction: "ease",
       renderStartFrom: "left-bottom",
-      translateLine: true,
-      translateDuration: 0.3,
-      translateStartDelay: 0,
-      translateItemDelay: 0,
-      translateTimingFunction: "ease"
     },
     axisXGridLineSettings: {
       useAnimation: true,
-      renderType: "draw",
-      // draw, fade
+      renderType: "draw", // draw, fade
       renderDuration: 0.4,
       renderStartDelay: 0,
       renderItemDelay: 0.1,
       renderTimingFunction: "ease",
       renderStartFrom: "left-bottom",
-      translateLine: true,
-      translateDuration: 0.3,
-      translateStartDelay: 0,
-      translateItemDelay: 0,
-      translateTimingFunction: "ease"
     },
     axisYLabelSettings: {
       useAnimation: true,
-      renderType: "fade",
-      // fade
+      renderType: "fade", // fade
       renderDuration: 0.4,
       renderStartDelay: 0,
       renderItemDelay: 0.1,
       renderTimingFunction: "ease",
       renderStartFrom: "bottom",
-      translateLabel: true,
-      translateDuration: 0.3,
-      translateStartDelay: 0,
-      translateItemDelay: 0,
-      translateTimingFunction: "ease"
     },
     axisXLabelSettings: {
       useAnimation: true,
-      renderType: "fade",
-      // fade
+      renderType: "fade", // fade
       renderDuration: 0.4,
       renderStartDelay: 0,
       renderItemDelay: 0.1,
       renderTimingFunction: "ease",
       renderStartFrom: "left",
-      translateLabel: true,
-      translateDuration: 0.3,
-      translateStartDelay: 0,
-      translateItemDelay: 0,
-      translateTimingFunction: "ease"
     },
     barSettings: {
       useAnimation: true,
-      renderType: "grow",
-      // fade, grow, grow-async
+      renderType: "grow", // fade, grow, grow-async
       renderDuration: 2,
       renderStartDelay: 0,
       renderItemDelay: 0.1,
       renderTimingFunction: "ease",
       renderStartFrom: "left",
       textRender: true,
-      textRenderType: "grow",
-      // fade, grow, grow-async
+      textRenderType: "fade", // fade
       textRenderDuration: 2,
       textRenderStartDelay: 0,
       textRenderItemDelay: 0.1,
       textRenderTimingFunction: "ease",
       textRenderStartFrom: "left",
-      translateBar: false,
-      translateDuration: 0.3,
-      translateStartDelay: 0,
-      translateItemDelay: 0,
-      translateTimingFunction: "ease"
-    }
-  }
+    },
+  },
 };
+
 const normalBarTypes = {
   scopeSettings: {
     minScope: "nevative-number",
-    maxScope: "positive-number"
-  }
+    maxScope: "positive-number",
+  },
 };
-const checkNormalBar = _ref3 => {
-  let {
-    normalSettings,
-    scopeSettings,
-    axisXGridLineSettings,
-    axisYGridLineSettings,
-    leftLabelSettings,
-    rightLabelSettings,
-    bottomLabelSettings,
-    topLabelSettings,
-    leftLegendSettings,
-    rightLegendSettings,
-    bottomLegendSettings,
-    topLegendSettings,
-    legendSettings,
-    barSettings,
-    animationSettings
-  } = _ref3;
+
+export const checkNormalPyramid = ({
+  normalSettings,
+  scopeSettings,
+  axisXGridLineSettings,
+  axisYGridLineSettings,
+  leftLabelSettings,
+  rightLabelSettings,
+  bottomLabelSettings,
+  topLabelSettings,
+  leftLegendSettings,
+  rightLegendSettings,
+  bottomLegendSettings,
+  topLegendSettings,
+  legendSettings,
+  barSettings,
+  animationSettings,
+}) => {
   const result = {
     normalSettings,
     scopeSettings,
@@ -359,62 +301,64 @@ const checkNormalBar = _ref3 => {
     topLegendSettings,
     legendSettings,
     barSettings,
-    animationSettings
+    animationSettings,
   };
-  Object.keys(normalBarSetting).forEach(setting => {
-    var _result$setting;
-    (_result$setting = result[setting]) !== null && _result$setting !== void 0 ? _result$setting : result[setting] = {};
+
+  Object.keys(normalBarSetting).forEach((setting) => {
+    result[setting] ??= {};
+
     if (setting === "animationSettings") {
-      Object.keys(normalBarSetting[setting]).forEach(animation => {
-        var _result$setting2, _result$setting2$anim;
-        (_result$setting2$anim = (_result$setting2 = result[setting])[animation]) !== null && _result$setting2$anim !== void 0 ? _result$setting2$anim : _result$setting2[animation] = {};
-        Object.keys(normalBarSetting[setting][animation]).forEach(detail => {
-          var _result$setting$anima, _result$setting$anima2;
-          (_result$setting$anima2 = (_result$setting$anima = result[setting][animation])[detail]) !== null && _result$setting$anima2 !== void 0 ? _result$setting$anima2 : _result$setting$anima[detail] = normalBarSetting[setting][animation][detail];
+      Object.keys(normalBarSetting[setting]).forEach((animation) => {
+        result[setting][animation] ??= {};
+
+        Object.keys(normalBarSetting[setting][animation]).forEach((detail) => {
+          result[setting][animation][detail] ??= normalBarSetting[setting][animation][detail];
         });
       });
     } else {
-      Object.keys(normalBarSetting[setting]).forEach(detail => {
-        var _result$setting3, _result$setting3$deta;
-        (_result$setting3$deta = (_result$setting3 = result[setting])[detail]) !== null && _result$setting3$deta !== void 0 ? _result$setting3$deta : _result$setting3[detail] = normalBarSetting[setting][detail];
+      Object.keys(normalBarSetting[setting]).forEach((detail) => {
+        result[setting][detail] ??= normalBarSetting[setting][detail];
       });
     }
   });
-  result.normalSettings.margin = checkMargin({
-    margin: result.normalSettings.margin
-  });
-  result.normalSettings.innerMargin = checkInnerMargin({
-    innerMargin: result.normalSettings.innerMargin
-  });
-  const checkedSize = (0, _checkCommonException.checkSize)({
+
+  result.normalSettings.margin = checkMargin({ margin: result.normalSettings.margin });
+  result.normalSettings.innerMargin = checkInnerMargin({ innerMargin: result.normalSettings.innerMargin });
+
+  const checkedSize = checkSize({
     width: result.normalSettings.width,
     height: result.normalSettings.height,
     margin: result.normalSettings.margin,
-    padding: result.normalSettings.padding
+    padding: result.normalSettings.padding,
   });
+
   result.normalSettings.width = checkedSize.width;
   result.normalSettings.height = checkedSize.height;
   result.normalSettings.margin = checkedSize.margin;
   result.normalSettings.padding = checkedSize.padding;
-  Object.keys(normalBarTypes).forEach(setting => {
-    Object.keys(normalBarTypes[setting]).forEach(detail => {
+
+  Object.keys(normalBarTypes).forEach((setting) => {
+    Object.keys(normalBarTypes[setting]).forEach((detail) => {
       switch (normalBarTypes[setting][detail]) {
         case "nevative-number":
           if (result[setting][detail] <= 0) {
             break;
           }
+
           result[setting][detail] = 0;
+
           break;
         case "positive-number":
           if (result[setting][detail] >= 0) {
             break;
           }
+
           result[setting][detail] = 0;
           break;
         default:
       }
     });
   });
+
   return result;
 };
-exports.checkNormalBar = checkNormalBar;

@@ -73,7 +73,7 @@ const DrawXAxisGridLine = _ref => {
       linePath = horizontal ? "\n        M 0,".concat(location - (useAnimation ? translate : 0), "\n        h ").concat(height, "\n      ") : "\n        M ".concat(location - (useAnimation ? translate : 0), ",0\n        v ").concat(height, "\n      ");
     }
     return linePath;
-  }, [horizontal, height, lineDashWidth, lineDashGap]);
+  }, [horizontal, height, lineDashWidth, lineDashGap, lineDash, useAnimation]);
   if (!lineVisible) {
     return;
   }

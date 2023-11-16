@@ -27,6 +27,12 @@ Object.defineProperty(exports, "NormalMap", {
     return _maps.NormalMap;
   }
 });
+Object.defineProperty(exports, "NormalPyramid", {
+  enumerable: true,
+  get: function () {
+    return _pyramid.NormalPyramid;
+  }
+});
 Object.defineProperty(exports, "NormalScatter", {
   enumerable: true,
   get: function () {
@@ -62,3 +68,4 @@ var _maps = require("./maps/maps");
 var _scatter = require("./scatter/scatter");
 var _lines = require("./lines/lines");
 var _pies = require("./pies/pies");
+var _pyramid = require("./pyramid/pyramid");

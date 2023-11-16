@@ -68,7 +68,7 @@ const DrawYAxisLabel = _ref => {
     className: _yAxisLabelModule.default.container,
     children: yAxis.map((c, idx) => {
       if (!showTopScope && (idx === 0 || idx === yAxis.length - 1) && c !== 0) {
-        return /*#__PURE__*/(0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {});
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)("g", {}, "level-" + ms + "-" + idx + "-" + c);
       }
       const location = yAxisHeight * idx;
       const nowKey = "y-axis-label-".concat(c);
@@ -118,7 +118,7 @@ const DrawYAxisLabel = _ref => {
           strokeOpacity: sideLineOpacity,
           strokeWidth: sideLineWidth
         })]
-      }, "level-" + ms + "-" + idx);
+      }, "level-" + ms + "-" + idx + "-" + c);
     })
   });
 };

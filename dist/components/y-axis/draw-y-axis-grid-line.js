@@ -61,7 +61,7 @@ const DrawYAxisGridLine = _ref => {
     className: _yAxisGridLineModule.default.container,
     children: yAxis.map((c, idx) => {
       if (!showTopScope && (idx === 0 || idx === yAxis.length - 1) && c !== 0) {
-        return;
+        return /*#__PURE__*/(0, _jsxRuntime.jsx)("g", {}, "background-line-y-" + ms + "-" + idx);
       }
 
       // 현재 위치 계산

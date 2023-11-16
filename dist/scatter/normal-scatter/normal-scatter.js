@@ -10,60 +10,7 @@ var _labelValueCommon = require("../../components/label-value-common/label-value
 var _calculateScope = require("../../common/utils/scope/calculate-scope");
 var _calculatePointPosition = require("../../common/scatter-common/utils/calculate-point-position");
 var _jsxRuntime = require("react/jsx-runtime");
-function CircleWithTooltip(_ref) {
-  let {
-    x,
-    y,
-    xPos,
-    yPos,
-    group,
-    pointSize,
-    groupColor,
-    pointBorderWidth,
-    tooltipOn,
-    xName,
-    yName,
-    xLegend,
-    yLegend,
-    pointStyle
-  } = _ref;
-  const [showTooltip, setShowTooltip] = (0, _react.useState)(false);
-  const handleMouseEnter = () => {
-    setShowTooltip(true);
-  };
-  const handleMouseLeave = () => {
-    setShowTooltip(false);
-  };
-  const tooltipStyle = {
-    fontSize: "10px",
-    backgroundColor: "blue",
-    color: "black",
-    padding: "5px",
-    borderRadius: "5px",
-    position: "absolute",
-    top: "".concat(yPos, "px"),
-    left: "".concat(xPos, "px"),
-    zIndex: "9999"
-  };
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("g", {
-    transform: "translate(".concat(xPos, ",").concat(yPos, ")"),
-    onMouseEnter: handleMouseEnter,
-    onMouseLeave: handleMouseLeave,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("circle", {
-      style: pointStyle,
-      cx: 0,
-      cy: 0,
-      r: pointSize,
-      fill: groupColor,
-      stroke: groupColor,
-      strokeWidth: pointBorderWidth
-    }), tooltipOn && showTooltip && /*#__PURE__*/(0, _jsxRuntime.jsx)("text", {
-      style: tooltipStyle,
-      children: "".concat(group.id, ", ").concat(xName ? xName : xLegend ? xLegend : "x", ": ").concat(x.toFixed(1), ", ").concat(yName ? yName : yLegend ? yLegend : "y", ": ").concat(y.toFixed(1))
-    })]
-  });
-}
-const NormalScatter = _ref2 => {
+const NormalScatter = _ref => {
   let {
     data,
     xLegend,
@@ -83,7 +30,7 @@ const NormalScatter = _ref2 => {
     topLabelSettings,
     pointSettings,
     animationSettings
-  } = _ref2;
+  } = _ref;
   const result = (0, _checkPointException.checkNormalPoint)({
     normalSettings,
     scopeSettings,
@@ -148,6 +95,53 @@ const NormalScatter = _ref2 => {
   const drawWidth = totalWidth - padding - padding;
   const lineHeight = totalHeight / (yScopeResult.scope.length - 1);
   const AreaWidth = drawWidth / (xScopeResult.scope.length - 1);
+  const [pointC, setPointC] = (0, _react.useState)({});
+  const [showTooltip, setShowTooltip] = (0, _react.useState)(false);
+  const [tooltipPosition, setTooltipPosition] = (0, _react.useState)({
+    left: 0,
+    top: 0
+  });
+  const handleMouseEnter = (groupName, x, y, xNow, yNow) => {
+    setShowTooltip(true);
+    setPointC({
+      groupName: groupName,
+      x: x,
+      y: y
+    });
+    setTooltipPosition({
+      left: xNow,
+      top: yNow
+    });
+  };
+  const tooltipStyle = {
+    fontSize: "10px",
+    backgroundColor: "blue",
+    color: "black",
+    padding: "5px",
+    borderRadius: "5px",
+    position: "absolute"
+  };
+  const handleMouseLeave = () => {
+    setShowTooltip(false);
+  };
+  const [opacities, setOpacities] = (0, _react.useState)([]);
+  (0, _react.useEffect)(() => {
+    const timeouts = data.flatMap((group, groupIdx) => {
+      return group.data.map(d => {
+        return setTimeout(() => {
+          setOpacities(prevOpacities => {
+            const newOpacities = [...prevOpacities];
+            newOpacities[groupIdx] = 1;
+            return newOpacities;
+          });
+        }, groupIdx * pointRenderTime * 1000);
+      });
+    });
+    return () => {
+      timeouts.forEach(timeout => clearTimeout(timeout));
+      setOpacities([]);
+    };
+  }, [data, pointRenderTime]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_labelValueCommon.LabelValueCommon, {
     data: data,
     keys: data.map(d => d.id),
@@ -175,51 +169,39 @@ const NormalScatter = _ref2 => {
     bottomLegendSettings: result.bottomLegendSettings,
     topLegendSettings: result.topLegendSettings,
     animationSettings: result.animationSettings,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("g", {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("g", {
       transform: "translate(".concat(padding, ")"),
-      children: data.flatMap((group, groupIdx) => {
+      children: [data.flatMap((group, groupIdx) => {
         // 그룹에 색상 할당
         const groupColor = colorPalette[groupIdx % colorPalette.length];
-        const [opacity, setOpacity] = (0, _react.useState)(0);
-        (0, _react.useEffect)(() => {
-          const timeout = setTimeout(() => {
-            setOpacity(1);
-          }, groupIdx * 1000 * pointRenderTime);
-          return () => {
-            clearTimeout(timeout);
-            setOpacity(0);
-          };
-        }, [data]);
+        const opacity = opacities[groupIdx] || 0;
         const pointStyle = {
           opacity
         };
         return group.data.map((item, idx) => {
           const xPos = (0, _calculatePointPosition.calculateXPosition)(item.x, xScopeResult, totalWidth, xReverse);
           const yPos = (0, _calculatePointPosition.calculateYPosition)(item.y, yScopeResult, totalHeight, yReverse);
-          return /*#__PURE__*/(0, _jsxRuntime.jsx)(CircleWithTooltip, {
-            xPos: xPos // 점이 찍히는 X 위치
-            ,
-            yPos: yPos // 점이 찍히는 Y 위치
-            ,
-            x: item.x // X좌표
-            ,
-            y: item.y // Y좌표
-            ,
-            group: {
-              id: group.id
-            },
-            pointSize: pointSize,
-            groupColor: groupColor,
-            tooltipOn: tooltipOn,
-            xName: xName,
-            yName: yName,
-            xLegend: xLegend,
-            yLegend: yLegend,
-            groupIdx: groupIdx,
-            pointStyle: pointStyle
+          return /*#__PURE__*/(0, _jsxRuntime.jsx)("g", {
+            transform: "translate(".concat(xPos, ",").concat(yPos, ")"),
+            onMouseEnter: () => handleMouseEnter(group.id, item.x, item.y, xPos, yPos),
+            onMouseLeave: handleMouseLeave,
+            children: /*#__PURE__*/(0, _jsxRuntime.jsx)("circle", {
+              style: pointStyle,
+              cx: 0,
+              cy: 0,
+              r: pointSize,
+              fill: groupColor,
+              stroke: groupColor
+            })
           }, "data-" + groupIdx + idx);
         });
-      })
+      }), tooltipOn && showTooltip && /*#__PURE__*/(0, _jsxRuntime.jsx)("text", {
+        style: {
+          ...tooltipStyle,
+          transform: "translate(".concat(tooltipPosition.left, "px, ").concat(tooltipPosition.top, "px)")
+        },
+        children: "".concat(pointC.groupName, ", ").concat(xName ? xName : xLegend ? xLegend : "x", ": ").concat(pointC.x.toFixed(1), ", ").concat(yName ? yName : yLegend ? yLegend : "y", ": ").concat(pointC.y.toFixed(1))
+      })]
     })
   });
 };

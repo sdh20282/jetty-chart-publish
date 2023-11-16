@@ -52,7 +52,7 @@ const normalLineSetting = {
     autoScope: true,
     maxScope: 700,
     minScope: -100,
-    showTopScope: false
+    showTopScope: true
   },
   // y축 라인 세팅
   axisYGridLineSettings: {
@@ -232,7 +232,6 @@ const normalLineSetting = {
     pointLabelOffsetY: -10,
     pointLabelWeight: 500,
     enableArea: false,
-    areaColorFollowLineColor: true,
     areaOpacity: 0.5,
     enableCurve: false,
     smoothDegree: 0.15,
@@ -306,7 +305,6 @@ const normalLineSetting = {
       useAnimation: true,
       useGridAnimation: true,
       renderReverse: false,
-      // renderLineSingly: true,
       translateReverse: false
     },
     lineSettings: {
@@ -316,7 +314,7 @@ const normalLineSetting = {
       lineRenderStartDelay: 0,
       lineRenderItemDelay: 0,
       lineRenderTimingFunction: "ease",
-      translateLine: true,
+      translateLine: false,
       translateLineItemDelay: 0,
       translateLineDuration: 0.5,
       translateLineStartDelay: 0,
@@ -330,7 +328,7 @@ const normalLineSetting = {
       pointRenderStartDelay: 0,
       pointRenderItemDelay: 0,
       pointRenderTimingFunction: "ease",
-      translatePoint: true,
+      translatePoint: false,
       translatePointItemDelay: 0,
       translatePointDuration: 0.5,
       translatePointStartDelay: 0,
@@ -343,7 +341,7 @@ const normalLineSetting = {
       areaRenderStartDelay: 0,
       areaRenderItemDelay: 0,
       areaRenderTimingFunction: "ease",
-      translateArea: true,
+      translateArea: false,
       translateAreaItemDelay: 0,
       translateAreaDuration: 0.5,
       translateAreaStartDelay: 0,
